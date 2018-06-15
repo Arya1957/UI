@@ -1,26 +1,69 @@
-/*
-创建一个 GoTop 对象，当 new 一个 GotTop 对象则会在页面上创建一个回到顶部的元素，点击页面滚动到顶部。拥有以下属性和方法
 
-1. `ct`属性，GoTop 对应的 DOM 元素的容器
-2.  `target`属性， GoTop 对应的 DOM 元素
-3.  `bindEvent` 方法， 用于绑定事件
-4 `createNode` 方法， 用于在容器内创建节点
- */
-
-function GoTop(el,target){
+function GoTop(el, target) {
     this.$el = el;
     this.target = target || this.createNode();
     this.bindEvent();
 }
 
-GoTop.prototype.bindEvent = function(){
+GoTop.prototype.bindEvent = function () {
+    this.target.addEventListener('click', () => {
+        window.scrollTo(0, 0)
+    });
 
-
+    window.onscroll = () => {
+        (window.pageYOffset >= 500) ? this.target.style.display = 'block' : this.target.style.display = 'none';
+        // 等价于下面的代码
+        // if(window.pageYOffset >= 500){
+        //     this.target.style.display = 'block';
+        // } else{
+        //     this.target.style.display = 'none';
+        // }
+    };
 };
 
-GoTop.prototype.createNode = function(){
+GoTop.prototype.createNode = function () {
     let btn = document.createElement('button');
     btn.innerText = '回到顶部';
     this.$el.appendChild(btn);
+    btn.style.display = 'none'; // 默认不显示
+
     return btn
+
 };
+
+
+/*  ES6 写法
+class GoTop {
+    constructor(el, target) {
+        this.$el = el;
+        this.target = target || this.createNode();
+        this.bindEvent()
+    }
+
+    createNode() {
+        let btn = document.createElement('button');
+        btn.innerText = '回到顶部';
+        this.$el.appendChild(btn);
+        btn.style.display = 'none'; // 默认不显示
+
+        return btn
+    }
+
+    bindEvent() {
+        this.target.addEventListener('click', () => {
+            window.scrollTo(0, 0)
+        });
+
+        window.onscroll = () => {
+            (window.pageYOffset >= 500) ? this.target.style.display = 'block' : this.target.style.display = 'none';
+            // 等价于下面的代码
+            // if(window.pageYOffset >= 500){
+            //     this.target.style.display = 'block';
+            // } else{
+            //     this.target.style.display = 'none';
+            // }
+        };
+    }
+}
+*/
+
