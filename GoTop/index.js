@@ -11,7 +11,7 @@ GoTop.prototype.bindEvent = function () {
     });
 
     window.onscroll = () => {
-        (window.pageYOffset >= 500) ? this.target.style.display = 'block' : this.target.style.display = 'none';
+        (window.pageYOffset >= 100) ? this.target.style.display = 'block' : this.target.style.display = 'none';
         // 等价于下面的代码
         // if(window.pageYOffset >= 500){
         //     this.target.style.display = 'block';
