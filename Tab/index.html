@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tab 组件</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="tab tab1">
+            <ul class="tab-header">
+                <li class="active">选项1</li>
+                <li>选项2</li>
+                <li>选项3</li>
+            </ul>
+            <ul class="tab-content">
+                <li class="active">内容1</li>
+                <li>内容2</li>
+                <li>内容3</li>
+            </ul>
+        </div>
+        <hr>
+        <div class="tab tab2">
+            <ul class="tab-header">
+                <li class="active">选项1</li>
+                <li>选项2</li>
+                <li>选项3</li>
+            </ul>
+            <ul class="tab-content">
+                <li class="active">内容4</li>
+                <li>内容5</li>
+                <li>内容6</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="Tab.js"></script>
+    <script>
+        let tabs = document.querySelectorAll('.tab');
+        tabs.forEach((tab) => new Tab(tab))
+        //  NodeList.prototype.forEach()  https://developer.mozilla.org/en-US/docs/Web/API/NodeList/forEach
+    </script>
+</body>
+
+</html>

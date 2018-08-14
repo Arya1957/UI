@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>轮播组件</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+  <div class="slider-wrapper">
+    <ol class="slider">
+      <li data-id="1">
+        <img src="./images/1.jpg" alt="cat">
+      </li>
+      <li data-id="2">
+        <img src="./images/2.jpg" alt="cat">
+      </li>
+      <li data-id="3">
+        <img src="./images/3.jpg" alt="cat">
+      </li>
+      <li data-id="4">
+        <img src="./images/4.jpg" alt="cat">
+      </li>
+      <li data-id="5">
+        <img src="./images/5.jpg" alt="cat">
+      </li>
+    </ol> 
+  </div>
+
+  <script src="../vendor/jquery-3.2.1.min.js"></script>
+  <script src="./Slider.js"></script>
+  <script>
+    //  new 一个轮播对象
+    let slider = new Slider({
+      el: $('.slider-wrapper'),
+      interval: 3000,
+      bullets: true, // 是否需要图片下方切换的bullets，默认为  false
+      arrow: true , //  是否需要播放上一张，下一张的按钮，默认为  false
+      autoplay: true // 是否需要自动播放，默认为 false
+    });
+
+  </script>
+</body>
+
+</html>
