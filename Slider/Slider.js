@@ -44,8 +44,6 @@ class Slider {
     if (this.autoplay) {
       this.$sliderCt.on('mouseenter', () => {
         clearInterval(this.timerId);
-
-        console.log('clearInterval')
       })
       this.$sliderCt.on('mouseleave', () => {
         this.autoPlay()
@@ -103,10 +101,8 @@ class Slider {
   }
 
   autoPlay() {
-    console.log('autoPlay')
     this.timerId = setInterval(() => {
       this.next();
-      console.log(new Date())
     }, 3000)
   }
 }

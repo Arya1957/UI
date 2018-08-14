@@ -17,3 +17,9 @@
 ###   Tab 组件
 [源码](https://github.com/Arya1957/UI/blob/master/Tab/index.js)
 [预览](https://arya1957.github.io/UI/Tab/index.html)
+
+
+###  无缝轮播
+[源码](https://github.com/Arya1957/UI/blob/master/Slider/Slider.js)
+[预览](https://arya1957.github.io/UI/Slider/index.html)
+
