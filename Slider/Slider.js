@@ -1,33 +1,33 @@
 class Slider {
   constructor(options) {
     this.$el = options.el;
-    this.$sliderCt = this.$el.find('.slider');
-    this.$sliderItems = this.$sliderCt.find('li');
-    this.$sliderWidth = this.$sliderItems.width();
     this.interval = options.interval || 3000;
-    this.index = 0;
-    this.length = this.$sliderItems.length;
     this.bullets = options.bullets || false;
     this.arrow = options.arrow || false;
     this.autoplay = options.autoplay || false;
     this.init();
     this.bindEvents();
-    // this.start();
   }
 
   init() {
+    this.$sliderCt = this.$el.find('.slider'); // 轮播容器
+    this.$sliderItems = this.$sliderCt.find('li'); // 轮播对象
+    this.$sliderWidth = this.$sliderItems.width(); // 每一个轮播对象的宽度
+    this.length = this.$sliderItems.length; // 轮播对象个数，设置容器宽度和判断轮播到第几个时用
+    this.index = 0; // 当前是第几个轮播对象
+    this.isAnimate = false; // 添加状态锁
+
     /* 第一步： 拷贝图片，为无缝轮播做准备 */
     this.$sliderCt.prepend(this.$sliderItems.last().clone()); // 将最后一张图片拷贝到第一张图片前面
     this.$sliderCt.append(this.$sliderItems.first().clone()); //  将第一张图片拷贝到最后一张图片后面
     this.$sliderCt.width(this.$sliderWidth * (this.length + 2));
     this.$sliderCt.css('left', -this.$sliderWidth); // 初始偏移量
-    this.isAnimate = false; // 添加状态锁
     /* 第二步，判断是否需要加 bullets */
     if (this.bullets) this.renderBullet();
     /* 第三步，判断是否需要加上一张、下一张按钮 */
     if (this.arrow) this.renderArrow();
     /* 判断是否需要自动播放 */
-    if (this.autoplay) this.autoPlay()
+    if (this.autoplay) this.autoPlay();
   }
 
   bindEvents() {
@@ -35,18 +35,20 @@ class Slider {
     let $nextBtn = $('.arrow.next');
     $preBtn.click(this.pre.bind(this));  // 播放上一帧
     $nextBtn.click(this.next.bind(this)); //播放下一帧
+    //  .click()  https://www.jquery123.com/click/
     let _this = this;
-    this.$bullets.on('click', function () {
+    //  在事件处理程序中this代表事件源DOM对象， 而下面需要改变实例对象上的一些属性，而如果用箭头函数就无法获取当前点击对象的index ($(this).index()这里的this 不再是DOM 对象)，所以要先保存 this 
+    this.$bullets.on('click',  function()  {  
       _this.index = $(this).index();
       _this.$sliderCt.css('left', -(_this.index + 1) * _this.$sliderWidth);
       _this.setBullet(_this.index);
     });
     if (this.autoplay) {
       this.$sliderCt.on('mouseenter', () => {
-        clearInterval(this.timerId);
+        clearInterval(this.timerId);  // 鼠标进入停止播放
       })
       this.$sliderCt.on('mouseleave', () => {
-        this.autoPlay()
+        this.autoPlay()  // 鼠标离开开始轮播
       })
     }
   }
